@@ -63,13 +63,13 @@ public class BlueTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                mountDepositTarget = 450;
-                turretArm.setTargetPosition(mountDepositTarget);
+                armDepositTarget = 450;
+                turretArm.setTargetPosition(armDepositTarget);
                 turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 turretArm.setPower(0.8);
             } else if(gamepad2.dpad_left) {
-                mountDepositTarget = 320;
-                turretArm.setTargetPosition(mountDepositTarget);
+                armDepositTarget = 320;
+                turretArm.setTargetPosition(armDepositTarget);
                 turretArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 turretArm.setPower(0.8);
             }
@@ -146,7 +146,10 @@ public class BlueTeam extends LinearOpMode {
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);
-            } else roller.setPower(0);
+            } else {
+                roller.setPower(0);
+                turretArm.setTargetPosition(armDepositTarget);
+            }
             // end of roller
 
             Pose2d poseEstimate = drive.getPoseEstimate();
@@ -154,13 +157,13 @@ public class BlueTeam extends LinearOpMode {
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", poseEstimate.getHeading());
 
-            telemetry.addData("Mount Position", turretMount.getCurrentPosition());
-            telemetry.addData("Arm Position", turretArm.getCurrentPosition());
+            telemetry.addData("MountPosition", turretMount.getCurrentPosition());
+            telemetry.addData("ArmPosition", turretArm.getCurrentPosition());
 
             telemetry.addData("LeftStickY", gamepad2.left_stick_y);
             telemetry.addData("RightStickX", gamepad2.right_stick_x);
 
-            telemetry.addData("Location", armDepositTarget);
+            telemetry.addData("ArmTarget", armDepositTarget);
 
             telemetry.addData("TurretMode", turretMode);
 
