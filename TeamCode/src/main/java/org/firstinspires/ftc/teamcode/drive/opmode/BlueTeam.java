@@ -26,7 +26,6 @@ public class BlueTeam extends LinearOpMode {
     public static double carouselPower = 1;
     public static boolean turretMode = false;
 
-
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
@@ -70,7 +69,12 @@ public class BlueTeam extends LinearOpMode {
             } else if(gamepad2.dpad_left) {
                 armDepositTarget = 320;
                 turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                turretArm.setPower(0.8);
+            } else if(gamepad2.dpad_down) {
+                armDepositTarget = 170;
+                turretArm.setTargetPosition(armDepositTarget);
+                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 turretArm.setPower(0.8);
             }
 
@@ -95,7 +99,7 @@ public class BlueTeam extends LinearOpMode {
             }
 
             // TurretMode
-            if (gamepad2.x){
+            if (gamepad2.x) {
                 turretMode = !turretMode;
             }
 
@@ -148,7 +152,8 @@ public class BlueTeam extends LinearOpMode {
                 turretArm.setTargetPosition(0);
             } else {
                 roller.setPower(0);
-                turretArm.setTargetPosition(armDepositTarget);
+//                turretArm.setTargetPosition(armDepositTarget);
+
             }
             // end of roller
 

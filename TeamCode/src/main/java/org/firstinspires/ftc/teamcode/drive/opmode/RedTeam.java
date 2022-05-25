@@ -25,6 +25,13 @@ public class RedTeam extends LinearOpMode {
     public static double carouselPower = 1;
     public static boolean turretMode = false;
 
+    private void armPosition(int depositTarget, DcMotor arm) {
+        armDepositTarget = depositTarget;
+        arm.setTargetPosition(armDepositTarget);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setPower(0.8);
+    }
+
     @Override
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
@@ -61,15 +68,11 @@ public class RedTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                armDepositTarget = 450;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                turretArm.setPower(0.8);
+                armPosition(450, turretArm);
             } else if(gamepad2.dpad_left) {
-                armDepositTarget = 320;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                turretArm.setPower(0.8);
+                armPosition(320, turretArm);
+            } else if(gamepad2.dpad_down) {
+                armPosition(150, turretArm);
             }
 
             //end of dpad choice
@@ -93,7 +96,7 @@ public class RedTeam extends LinearOpMode {
             }
 
             // TurretMode
-            if (gamepad2.x){
+            if (gamepad2.x) {
                 turretMode = !turretMode;
             }
 
@@ -140,13 +143,14 @@ public class RedTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.7);
+                roller.setPower(0.9);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);
             } else {
                 roller.setPower(0);
-                turretArm.setTargetPosition(armDepositTarget);
+//              turretArm.setTargetPosition(armDepositTarget);
+
             }
             // end of roller
 
