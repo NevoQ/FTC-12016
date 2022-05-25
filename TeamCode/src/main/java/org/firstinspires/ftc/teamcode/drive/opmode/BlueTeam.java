@@ -19,12 +19,18 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @TeleOp(group = "drive")
 @Config
 public class BlueTeam extends LinearOpMode {
-
     public static int mountDepositTarget = 600;
     public static int armDepositTarget = 320;
 
     public static double carouselPower = 1;
     public static boolean turretMode = false;
+
+    private void armPosition(int depositTarget, DcMotor arm) {
+        armDepositTarget = depositTarget;
+        arm.setTargetPosition(armDepositTarget);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setPower(0.8);
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -49,10 +55,10 @@ public class BlueTeam extends LinearOpMode {
             drive.setWeightedDrivePower(
                     new Pose2d(
                             new Vector2d(
-                                    -gamepad1.left_stick_y,
-                                    -gamepad1.left_stick_x
-                            )/*.rotated(-drive.getExternalHeading())*/,
-                            -gamepad1.right_stick_x
+                                    -gamepad1.left_stick_y * 0.9,
+                                    -gamepad1.left_stick_x * 0.9
+                            ).rotated(-drive.getExternalHeading()),
+                            -gamepad1.right_stick_x * 0.9
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
@@ -62,20 +68,13 @@ public class BlueTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                armDepositTarget = 450;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                turretArm.setPower(0.8);
+                armPosition(450, turretArm);
             } else if(gamepad2.dpad_left) {
-                armDepositTarget = 320;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                turretArm.setPower(0.8);
+                armPosition(320, turretArm);
             } else if(gamepad2.dpad_down) {
-                armDepositTarget = 170;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                turretArm.setPower(0.8);
+                armPosition(240, turretArm);
+            } else if(gamepad2.dpad_right) {
+                armPosition(170, turretArm);
             }
 
             //end of dpad choice
@@ -152,7 +151,7 @@ public class BlueTeam extends LinearOpMode {
                 turretArm.setTargetPosition(0);
             } else {
                 roller.setPower(0);
-//                turretArm.setTargetPosition(armDepositTarget);
+//              turretArm.setTargetPosition(armDepositTarget);
 
             }
             // end of roller

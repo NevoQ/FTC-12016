@@ -55,10 +55,10 @@ public class RedTeam extends LinearOpMode {
             drive.setWeightedDrivePower(
                     new Pose2d(
                             new Vector2d(
-                                    -gamepad1.left_stick_y,
-                                    -gamepad1.left_stick_x
-                            )/*.rotated(-drive.getExternalHeading())*/,
-                            -gamepad1.right_stick_x
+                                    -gamepad1.left_stick_y * 0.9,
+                                    -gamepad1.left_stick_x * 0.9
+                            ).rotated(-drive.getExternalHeading()),
+                            -gamepad1.right_stick_x * 0.9
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
@@ -72,7 +72,9 @@ public class RedTeam extends LinearOpMode {
             } else if(gamepad2.dpad_left) {
                 armPosition(320, turretArm);
             } else if(gamepad2.dpad_down) {
-                armPosition(150, turretArm);
+                armPosition(240, turretArm);
+            } else if(gamepad2.dpad_right) {
+                armPosition(170, turretArm);
             }
 
             //end of dpad choice
