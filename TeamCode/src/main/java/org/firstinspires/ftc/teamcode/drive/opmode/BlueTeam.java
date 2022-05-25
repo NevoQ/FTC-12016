@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Config
 public class BlueTeam extends LinearOpMode {
 
-    public static int mountDepositTarget = -600;
+    public static int mountDepositTarget = 600;
     public static int armDepositTarget = 320;
 
     public static double carouselPower = 1;
@@ -146,7 +146,7 @@ public class BlueTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.7);
+                roller.setPower(0.9);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);

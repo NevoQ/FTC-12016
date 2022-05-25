@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @TeleOp(group = "drive")
 @Config
 public class RedTeam extends LinearOpMode {
-    public static int mountDepositTarget = 600;
+    public static int mountDepositTarget = -600;
     public static int armDepositTarget = 320;
 
     public static double carouselPower = 1;
