@@ -58,7 +58,7 @@ public class RedTeam extends LinearOpMode {
                                     -gamepad1.left_stick_y * 0.8,
                                     -gamepad1.left_stick_x * 0.8
                             ).rotated(-drive.getExternalHeading()),
-                            -gamepad1.right_stick_x * 0.9
+                            -gamepad1.right_stick_x * 0.8
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
