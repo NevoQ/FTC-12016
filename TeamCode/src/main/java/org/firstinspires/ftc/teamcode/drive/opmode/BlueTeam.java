@@ -55,10 +55,10 @@ public class BlueTeam extends LinearOpMode {
             drive.setWeightedDrivePower(
                     new Pose2d(
                             new Vector2d(
-                                    -gamepad1.left_stick_y * 0.8,
-                                    -gamepad1.left_stick_x * 0.8
+                                    -gamepad1.left_stick_y * 0.7,
+                                    -gamepad1.left_stick_x * 0.7
                             ).rotated(-drive.getExternalHeading()),
-                            -gamepad1.right_stick_x * 0.8
+                            -gamepad1.right_stick_x * 0.7
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
