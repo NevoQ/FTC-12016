@@ -22,8 +22,8 @@ public class RedTeam extends LinearOpMode {
     public static int mountDepositTarget = -600;
     public static int armDepositTarget = 320;
 
-    public static double carouselPower = 1;
-    public static boolean turretMode = false;
+    public static double carouselPower = 0.7;
+    public static boolean turretMode = true;
 
     private void armPosition(int depositTarget, DcMotor arm) {
         armDepositTarget = depositTarget;
@@ -145,7 +145,7 @@ public class RedTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.9);
+                roller.setPower(0.8);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);
