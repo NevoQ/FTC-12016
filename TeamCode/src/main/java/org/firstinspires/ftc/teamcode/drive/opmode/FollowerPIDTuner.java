@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 /*
  * Op mode for preliminary tuning of the follower PID coefficients (located in the drive base
@@ -39,17 +38,7 @@ public class FollowerPIDTuner extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (!isStopRequested()) {
-            TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
-                    .forward(DISTANCE)
-                    .turn(Math.toRadians(90))
-                    .forward(DISTANCE)
-                    .turn(Math.toRadians(90))
-                    .forward(DISTANCE)
-                    .turn(Math.toRadians(90))
-                    .forward(DISTANCE)
-                    .turn(Math.toRadians(90))
-                    .build();
-            drive.followTrajectorySequence(trajSeq);
+
         }
     }
 }

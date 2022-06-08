@@ -20,12 +20,18 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Config
 public class BlueTeam extends LinearOpMode {
 
-    public static int mountDepositTarget = -600;
+    public static int mountDepositTarget = 600;
     public static int armDepositTarget = 320;
 
-    public static double carouselPower = 1;
-    public static boolean turretMode = false;
+    public static double carouselPower = 0.7;
+    public static boolean turretMode = true;
 
+    private void armPosition(int depositTarget, DcMotor arm) {
+        armDepositTarget = depositTarget;
+        arm.setTargetPosition(armDepositTarget);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setPower(0.8);
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -50,10 +56,10 @@ public class BlueTeam extends LinearOpMode {
             drive.setWeightedDrivePower(
                     new Pose2d(
                             new Vector2d(
-                                    -gamepad1.left_stick_y,
-                                    -gamepad1.left_stick_x
-                            )/*.rotated(-drive.getExternalHeading())*/,
-                            -gamepad1.right_stick_x
+                                    -gamepad1.left_stick_y * 0.7,
+                                    -gamepad1.left_stick_x * 0.7
+                            ).rotated(-drive.getExternalHeading()),
+                            -gamepad1.right_stick_x * 0.6
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
@@ -63,15 +69,13 @@ public class BlueTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                armDepositTarget = 450;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                turretArm.setPower(0.8);
+                armPosition(550, turretArm);
             } else if(gamepad2.dpad_left) {
-                armDepositTarget = 320;
-                turretArm.setTargetPosition(armDepositTarget);
-                turretArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                turretArm.setPower(0.8);
+                armPosition(320, turretArm);
+            } else if(gamepad2.dpad_down) {
+                armPosition(240, turretArm);
+            } else if(gamepad2.dpad_right) {
+                armPosition(170, turretArm);
             }
 
             //end of dpad choice
@@ -95,7 +99,7 @@ public class BlueTeam extends LinearOpMode {
             }
 
             // TurretMode
-            if (gamepad2.x){
+            if (gamepad2.x) {
                 turretMode = !turretMode;
             }
 
@@ -116,13 +120,13 @@ public class BlueTeam extends LinearOpMode {
 
                 if (gamepad2.left_stick_y < -0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
                 }  else if (gamepad2.left_stick_y > 0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
@@ -142,13 +146,14 @@ public class BlueTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.7);
+                roller.setPower(0.85);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);
             } else {
                 roller.setPower(0);
-                turretArm.setTargetPosition(armDepositTarget);
+//              turretArm.setTargetPosition(armDepositTarget);
+
             }
             // end of roller
 
