@@ -137,10 +137,10 @@ public class BlueTeam extends LinearOpMode {
             // end of turret
 
             // carousel
-            if (gamepad2.left_bumper)
-                carousel.setPower(carouselPower);
-            else if (gamepad2.right_bumper)
+            if (gamepad2.right_bumper)
                 carousel.setPower(-carouselPower);
+//            else if (gamepad2.left_bumper)
+//                carousel.setPower(carouselPower);
             else carousel.setPower(0);
             // end of carousel
 

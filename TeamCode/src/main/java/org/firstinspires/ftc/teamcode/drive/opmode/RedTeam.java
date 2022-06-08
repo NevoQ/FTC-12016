@@ -138,8 +138,8 @@ public class RedTeam extends LinearOpMode {
             // carousel
             if (gamepad2.left_bumper)
                 carousel.setPower(carouselPower);
-            else if (gamepad2.right_bumper)
-                carousel.setPower(-carouselPower);
+//            else if (gamepad2.right_bumper)
+//                carousel.setPower(-carouselPower);
             else carousel.setPower(0);
             // end of carousel
 
