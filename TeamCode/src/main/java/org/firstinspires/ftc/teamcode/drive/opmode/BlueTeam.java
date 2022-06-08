@@ -19,6 +19,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @TeleOp(group = "drive")
 @Config
 public class BlueTeam extends LinearOpMode {
+
     public static int mountDepositTarget = 600;
     public static int armDepositTarget = 320;
 
@@ -58,7 +59,7 @@ public class BlueTeam extends LinearOpMode {
                                     -gamepad1.left_stick_y * 0.7,
                                     -gamepad1.left_stick_x * 0.7
                             ).rotated(-drive.getExternalHeading()),
-                            -gamepad1.right_stick_x * 0.7
+                            -gamepad1.right_stick_x * 0.6
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
@@ -68,7 +69,7 @@ public class BlueTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                armPosition(450, turretArm);
+                armPosition(550, turretArm);
             } else if(gamepad2.dpad_left) {
                 armPosition(320, turretArm);
             } else if(gamepad2.dpad_down) {
@@ -119,13 +120,13 @@ public class BlueTeam extends LinearOpMode {
 
                 if (gamepad2.left_stick_y < -0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
                 }  else if (gamepad2.left_stick_y > 0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
@@ -145,7 +146,7 @@ public class BlueTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.8);
+                roller.setPower(0.85);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);

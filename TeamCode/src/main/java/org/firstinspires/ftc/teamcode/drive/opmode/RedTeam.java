@@ -58,7 +58,7 @@ public class RedTeam extends LinearOpMode {
                                     -gamepad1.left_stick_y * 0.7,
                                     -gamepad1.left_stick_x * 0.7
                             ).rotated(-drive.getExternalHeading()),
-                            -gamepad1.right_stick_x * 0.7
+                            -gamepad1.right_stick_x * 0.6
                     ).div(gamepad1.left_bumper ? 2 : 1)
             );
 
@@ -68,7 +68,7 @@ public class RedTeam extends LinearOpMode {
             //dpad choice
 
             if(gamepad2.dpad_up) {
-                armPosition(450, turretArm);
+                armPosition(550, turretArm);
             } else if(gamepad2.dpad_left) {
                 armPosition(320, turretArm);
             } else if(gamepad2.dpad_down) {
@@ -119,13 +119,13 @@ public class RedTeam extends LinearOpMode {
 
                 if (gamepad2.left_stick_y < -0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() + 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
                 }  else if (gamepad2.left_stick_y > 0.15) {
 
-                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 100);
+                    turretArm.setTargetPosition(turretArm.getCurrentPosition() - 60);
                     turretArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     turretArm.setPower(0.5);
 
@@ -145,7 +145,7 @@ public class RedTeam extends LinearOpMode {
 
             // roller
             if (gamepad1.right_trigger > 0) {
-                roller.setPower(0.8);
+                roller.setPower(0.85);
             }  else if(gamepad1.left_trigger > 0) {
                 roller.setPower(-1);
                 turretArm.setTargetPosition(0);
